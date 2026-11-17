@@ -14,6 +14,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<User> Users => Set<User>();
     public DbSet<Role> Roles => Set<Role>();
+    public DbSet<Student> Students { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -54,5 +55,12 @@ public class ApplicationDbContext : DbContext
             entity.HasIndex(r => r.RoleName)
                 .IsUnique();
         });
+        modelBuilder.Entity<Student>()
+            .HasIndex(s => s.RegisterNumber)
+            .IsUnique();
+
+        modelBuilder.Entity<Student>()
+            .HasIndex(s => s.Email)
+            .IsUnique();
     }
 }
