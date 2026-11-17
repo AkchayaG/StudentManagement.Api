@@ -1,0 +1,47 @@
+
+<div class="form-page">
+  <div class="form-card">
+    <h2>Add Department</h2>
+    <p>Enter department details</p>
+
+    <form (ngSubmit)="save()">
+      <label>Department Code</label>
+      <input
+        name="code"
+        [(ngModel)]="code"
+        maxlength="20"
+        placeholder="Example: CSE"
+        required
+      />
+
+      <label>Department Name</label>
+      <input
+        name="name"
+        [(ngModel)]="name"
+        maxlength="100"
+        placeholder="Computer Science and Engineering"
+        required
+      />
+
+      <label>Description</label>
+      <textarea
+        name="description"
+        [(ngModel)]="description"
+        maxlength="250"
+        placeholder="Enter description">
+      </textarea>
+
+      <p class="error" *ngIf="error()">{{ error() }}</p>
+
+      <div class="buttons">
+        <button type="button" class="cancel" (click)="cancel()">
+          Cancel
+        </button>
+
+        <button type="submit" [disabled]="saving()">
+          {{ saving() ? 'Saving...' : 'Save Department' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

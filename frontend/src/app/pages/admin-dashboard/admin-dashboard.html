@@ -1,12 +1,24 @@
 
 <div class="dashboard">
   <h1>Admin Dashboard</h1>
-  <p>Welcome, {{ auth.getName() }}!</p>
+
+  <p>Welcome, Admin User!</p>
   <p>Role: Administrator</p>
 
   <h3>Student Management</h3>
-  <p>Student features will be added in Feature 2.</p>
+  <p>View, add, edit and manage student records.</p>
 
-  <button (click)="logout()">Logout</button>
+  <div class="dashboard-actions">
+    <a routerLink="/students" class="view-btn">
+      Manage Students
+    </a>
+
+    <button class="logout-btn" (click)="logout()">
+      Logout
+    </button>
+    <button type="button" (click)="openDepartments()">
+      Manage Departments
+    </button>
+
+  </div>
 </div>
-

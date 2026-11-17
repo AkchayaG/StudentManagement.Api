@@ -1,0 +1,96 @@
+
+<div class="page">
+
+  <div class="page-header">
+    <div>
+      <h1>Student Management</h1>
+      <p>View, search and manage student records</p>
+    </div>
+
+    <div class="header-actions">
+      <button class="back-btn" (click)="goBack()">
+        Back to Dashboard
+      </button>
+
+      <button class="logout-btn" (click)="logout()">
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <input
+      type="text"
+      [(ngModel)]="keyword"
+      placeholder="Search by name, register no, department..."
+      (keyup.enter)="search()"
+    />
+
+    <button (click)="search()">Search</button>
+
+    <button
+      class="secondary-btn"
+      (click)="keyword = ''; loadStudents()">
+      Reset
+    </button>
+
+    <a *ngIf="isAdmin" routerLink="/students/add">
+      Add Student
+    </a>
+  </div>
+
+  <p *ngIf="loading()">Loading students...</p>
+
+  <p *ngIf="error()" class="error">
+    {{ error() }}
+  </p>
+
+  <div class="table-wrapper" *ngIf="!loading()">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Register No</th>
+          <th>Email</th>
+          <th>Department</th>
+          <th>Year</th>
+          <th>Phone</th>
+          <th *ngIf="isAdmin || isStaff">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let student of students()">
+          <td>{{ student.id }}</td>
+          <td>{{ student.name }}</td>
+          <td>{{ student.registerNumber }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.department }}</td>
+          <td>{{ student.year }}</td>
+          <td>{{ student.phoneNumber }}</td>
+
+          <td *ngIf="isAdmin || isStaff">
+            <a [routerLink]="['/students/edit', student.id]">
+              Edit
+            </a>
+
+            <button
+              *ngIf="isAdmin"
+              class="delete-btn"
+              (click)="deleteStudent(student.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+
+        <tr *ngIf="students().length === 0">
+          <td [attr.colspan]="isAdmin || isStaff ? 8 : 7">
+            No students found.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

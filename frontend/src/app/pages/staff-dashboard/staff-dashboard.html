@@ -1,12 +1,24 @@
 
 <div class="dashboard">
   <h1>Staff Dashboard</h1>
-  <p>Welcome, {{ auth.getName() }}!</p>
+
+  <p>Welcome, Staff User!</p>
   <p>Role: Staff</p>
 
   <h3>Student Management</h3>
-  <p>Student features will be added in Feature 2.</p>
+  <p>View and update student information.</p>
 
-  <button (click)="logout()">Logout</button>
+  <div class="dashboard-actions">
+    <a routerLink="/students" class="view-btn">
+      View Students
+    </a>
+
+    <button class="logout-btn" (click)="logout()">
+      Logout
+    </button>
+    <button type="button" (click)="openDepartments()">
+     View Departments
+     </button>
+
+  </div>
 </div>
-

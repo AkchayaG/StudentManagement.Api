@@ -1,0 +1,81 @@
+
+<div class="page">
+  <div class="container">
+
+    <div class="header">
+      <div>
+        <h1>Department Management</h1>
+        <p>View and manage college departments</p>
+      </div>
+
+      <div class="actions">
+        <button class="secondary" (click)="goBack()">
+          Back to Dashboard
+        </button>
+
+        <button class="danger" (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <input
+        type="text"
+        placeholder="Search department code or name"
+        #searchBox
+        (input)="search(searchBox.value)"
+      />
+
+      <button
+        *ngIf="isAdmin"
+        class="primary"
+        (click)="addDepartment()">
+        + Add Department
+      </button>
+    </div>
+
+    <p *ngIf="loading()">Loading departments...</p>
+    <p *ngIf="error()" class="error">{{ error() }}</p>
+
+    <div class="table-wrapper" *ngIf="!loading()">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Code</th>
+            <th>Department Name</th>
+            <th>Description</th>
+            <th *ngIf="isAdmin">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let d of departments()">
+            <td>{{ d.id }}</td>
+            <td>{{ d.code }}</td>
+            <td>{{ d.name }}</td>
+            <td>{{ d.description }}</td>
+
+            <td *ngIf="isAdmin">
+              <button class="edit" (click)="editDepartment(d.id)">
+                Edit
+              </button>
+
+              <button class="danger" (click)="deleteDepartment(d.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="departments().length === 0">
+            <td [attr.colspan]="isAdmin ? 5 : 4">
+              No departments found
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
