@@ -1,0 +1,15 @@
+node_modules/
+.angular/
+dist/
+bin/
+obj/
+.vs/
+.env
+.env.*
+appsettings.Development.json
+secrets.json
+*.user
+*.suo
+*.pfx
+*.pem
+*.key
